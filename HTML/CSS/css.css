@@ -1,0 +1,58 @@
+.out {
+	width: 600px;
+	border: 1px solid #c3c1c2;
+	margin: 0 auto;
+	font: 18px tahoma;
+	text-align: center;
+}
+.fl1,.fl2,.fl3,.fl4,.fl5 {
+	width: 118px;
+	height: 118px;
+	line-height: 118px;
+	border: 1px solid #e88f93;
+	float: left;
+}
+.fl6 {
+	width: 398px;
+	height: 165px;
+	border: 1px solid #bcbcbc;
+	border-top: none;
+	float: left;
+}
+.fl7 {
+	width: 198px;
+	height: 200px;
+	border: 1px solid #bcbcbc;
+	border-top: none;
+	float: right;
+}
+.fl8 {
+	float: left;
+	width: 152px;
+	height: 158px;
+	border: 1px solid #bcbcbc;
+}
+.fl9 {
+	float: left;
+	width: 244px;
+	height: 158px;
+	border: 1px solid #bcbcbc;
+}
+.fl10 {
+	width: 198px;
+	height: 200px;
+	float: right;
+	border: 1px solid #bcbcbc;
+}
+.fl11 {
+	float: left;
+	width: 398px;
+	height: 75px;
+	border: 1px solid #bcbcbc;
+}
+.fl12 {
+	float: left;
+	width: 598px;
+	height: 35px;
+	border: 1px solid #bcbcbc;
+}
