@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 点击li弹下标 </title>
+	<meta name="Description" content="" />
+	<style>
+		.out{
+			width: 300px;
+			margin: 0 auto;
+		}
+		.out li {
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid red;
+			padding-left: 10px;
+		}
+		.out ol li {
+			text-align: right;
+			padding-right: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="out">
+		<ul id="test">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+		</ul>
+		<ol id="text">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+		</ol>
+	</div>
+</body>
+<script>
+	// 点击某个li，弹出该li是第几个
+	var lis=document.getElementById('test').getElementsByTagName('li');
+	for (var i=0 ; i<lis.length ; i++){
+		lis[i].index = i+1;
+		lis[i].onclick = function(){
+			alert(this.index);
+		}
+	}
+	// 隔行点击
+	var texts=document.getElementById('text').getElementsByTagName('li');
+	for (var i=0 ; i<texts.length ; i++){
+		texts[i].index = i+1;
+		if ((i+1)%2==1){
+			texts[i].onclick = function(){
+				alert(this.index);
+			}
+		}else{
+			texts[i].ondblclick = function(){
+				alert(this.index);
+			}
+		}
+	}
+</script>
+</html>

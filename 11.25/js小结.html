@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> js小结 </title>
+	<meta name="Description" content="" />
+	<style>
+		li {
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<ul id="out">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+	</ul>
+</body>
+<script>
+	// 给li加背景
+	var lis=document.getElementById('out').getElementsByTagName('li');
+	for (var i=0 ; i<lis.length ; i++){
+		lis[i].index = i+1;
+		if ((i+1)%2==1){
+			lis[i].style.background='#ccc';
+		}else {
+			lis[i].style.background='#f00'
+		}
+	}
+
+	// if 判断 year 是否为闰年 
+	var year=1314;
+	if (
+		(year % 400 == 0)||
+		(year % 100 != 0 && year % 4 == 0)
+	){
+		alert('是闰年');
+	}else {
+		alert('不是闰年');
+	}
+
+	// 求和函数
+	function add(x,y){
+		var sum = 0;
+		for (var i=x ; i<=y ; i++){
+			sum = sum + i;
+		}
+		alert(sum);
+	}
+	add(1,100);
+
+	// 求积函数
+	function mul(x,y){
+		var pro = 1;
+		for (var i=x ; i<=y ; i++){
+			pro = pro * i;
+		}
+		alert(pro);
+	}
+	mul(1,10);
+	
+	// 取最大值函数
+	function getmax(arr){
+		var max=arr[0];
+		for (var i=0 ; i<arr.length ; i++){
+			if (max<arr[i]){
+				max=arr[i];				
+			}
+		}
+		alert(max);
+	}
+	var arrr=[5,4196,796,7,497,1469];
+	getmax(arrr);
+
+	// 取最小值函数
+	function getmin(arr){
+		var min=arr[0];
+		for (var i=0 ; i<arr.length ; i++){
+			if (min>arr[i]){
+				min=arr[i];				
+			}
+		}
+		alert(min);
+	}
+	var arrr=[5,4196,796,7,497,1469];
+	getmin(arrr);
+	
+	function text(){
+		x=2;
+	}
+	text();
+	var x=1;
+	
+	function test(){
+		x=20;alert(x);
+		test1();
+		function test1(){
+			x=30;
+			
+		}
+	}
+	test();
+	alert(x);
+</script>
+</html>
