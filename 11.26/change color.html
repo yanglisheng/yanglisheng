@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 隔行变色 </title>
+	<meta name="Description" content="" />
+	<style>
+		.out {
+			width: 300px;
+			margin: 50px auto;
+		}
+		.out ul li {
+			height: 30px;
+			line-height: 30px;
+			padding-left: 10px;
+			cursor: hand;
+			cursor: pointer;
+		}
+		.out .odd {
+			background-color: #0f0;
+		}
+		.out .even {
+			background-color: #f00;
+		}
+		.out .hover {
+			background-color: #00f;
+		}
+	</style>
+</head>
+<body>
+	<div class="out">
+		<ul id="con">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+		</ul>
+	</div>
+</body>
+<script>
+	var lis = document.getElementById('con').getElementsByTagName('li');
+	for (var i=0 ; i<lis.length ; i++){
+		lis.index = i;
+		if (i % 2 == 0){
+			lis[i].className = 'odd';  // 设置奇数行的背景颜色
+			lis[i].onmouseover = function (){
+				this.className = 'hover';
+			}
+			lis[i].onmouseout = function (){
+				this.className = 'odd';
+			} 
+		}else {
+			lis[i].className = 'even';  // 设置偶数行的背景颜色
+			lis[i].onmouseover = function (){
+				this.className = 'hover';
+			}
+			lis[i].onmouseout = function (){
+				this.className = 'even';
+			}
+		}
+		
+	}
+</script>
+</html>

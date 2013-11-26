@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 改变css样式 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{margin: 0;padding: 0;}
+		.change {
+			width: 265px;
+			height: 100px;
+			text-align: center;
+			line-height: 100px;
+			margin: 20px;
+			border: 5px solid red;
+			font-size: 16px;
+			overflow: hidden;
+		}
+		.button {
+			float: left;
+			width: 360px;
+		}
+		button {
+			float: left;
+			width: 70px;
+			height: 26px;
+			text-align: center;
+			margin: 2px 4px;
+			font-size:12px;
+		}
+	</style>
+</head>
+<body>
+	<div class="change" id="change">
+		<span>客官，你要奴家怎么变?</span>
+	</div>
+	<div class="button">
+		<button type="button" ><span>变宽</span></button>
+		<button type="button" ><span>变窄</span></button>
+		<button type="button" ><span>变高</span></button>
+		<button type="button" ><span>变矮</span></button>
+		<button type="button" ><span>加左边距</span></button>
+		<button type="button" ><span>加上边距</span></button>
+		<button type="button" ><span>变字体颜色</span></button>
+		<button type="button" ><span>字体变大</span></button>
+		<button type="button" ><span>字体变小</span></button>
+		<button type="button" ><span>边框变色</span></button>
+		<button type="button" ><span>给我消失</span></button>
+		<button type="button" ><span>给我出来</span></button>
+		<button type="button" ><span>变背景色</span></button>
+	</div>
+	<div>
+		<input type="button" value="改变value" />
+		<input type="text" value="客官，看我变了没" />
+	</div>
+</body>
+<script>
+	var div = document.getElementById('change');
+	var btns = document.getElementsByTagName('button');
+	var timer=null;
+	var inputs = document.getElementsByTagName('input');
+	inputs[0].onclick = function (){
+		div.innerHTML = inputs[1].value;
+		inputs[1].value = '客官，给点奖赏呗！';
+	}
+	btns[0].onclick = function (){
+		var num = Math.random();
+		div.style.width = 265+265*num+'px';	
+	};
+	btns[1].onclick = function (){
+		var num = Math.random();
+		div.style.width = 265-265*num+'px';	
+	};
+	btns[2].onclick = function (){
+		var num = Math.random();
+		div.style.height = 100+100*num+'px';	
+	};
+	btns[3].onclick = function (){
+		var num = Math.random();
+		div.style.height = 100-100*num+'px';	
+	};
+	btns[4].onclick = function (){
+		var num = Math.random();
+		div.style.marginLeft = 20+265*num+'px';	
+	};
+	btns[5].onclick = function (){
+		var num = Math.random();
+		div.style.marginTop = 20+265*num+'px';	
+	};
+	btns[6].onclick = function (){
+		var r = Math.floor(Math.random()*256);
+		var g = Math.floor(Math.random()*256);
+		var b = Math.floor(Math.random()*256);
+		var spans = div.getElementsByTagName('span');
+		spans[0].style.color = 'rgb('+r+','+g+','+b+')';
+	};
+	btns[7].onclick = function (){
+		div.style.fontSize = 24+'px';	
+	};
+	btns[8].onclick = function (){
+		div.style.fontSize = 12+'px';	
+	};
+	btns[9].onclick = function (){
+		var r = Math.floor(Math.random()*256);
+		var g = Math.floor(Math.random()*256);
+		var b = Math.floor(Math.random()*256);
+		div.style.borderColor = 'rgb('+r+','+g+','+b+')';
+	};
+	btns[10].onclick = function (){
+		div.style.visibility = 'hidden';
+	}
+	btns[11].onclick = function (){
+		div.style.visibility = '';
+	}
+	btns[12].onclick = function (){
+		var r = Math.floor(Math.random()*256);
+		var g = Math.floor(Math.random()*256);
+		var b = Math.floor(Math.random()*256);
+		div.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
+	};
+</script>
+</html>
