@@ -43,6 +43,7 @@
 </body>
 <script>
 	var lis = document.getElementById('con').getElementsByTagName('li');
+	document.getElementById('con').style.listStyleType = 'none';
 	for (var i=0 ; i<lis.length ; i++){
 		lis.index = i;
 		if (i % 2 == 0){
@@ -62,7 +63,6 @@
 				this.className = 'even';
 			}
 		}
-		
 	}
 </script>
 </html>

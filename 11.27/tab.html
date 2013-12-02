@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> tab切换 </title>
+	<meta name="Description" content="" />
+	<link rel="stylesheet" type="text/css" href="../css/compatible clearfix.css" />
+	<style>
+		*{margin: 0;padding: 0;}
+		.out {
+			width: 400px;
+			margin: 20px auto;
+		}
+		.out li {
+			float: left;
+			width: 98px;
+			height: 48px;
+			line-height: 48px;
+			text-align: center;
+			border: 1px solid red;
+			list-style-type: none;
+		}
+		.out div {
+			height: 350px;
+			border: 1px solid blue;
+			display: none;
+		}
+		.out .show {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="out" id="out">
+		<ul class='cf'>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<div class='show'>
+			<span>我是第一个</span>
+		</div>
+		<div>
+			<span>我是第二个</span>
+		</div>
+		<div>
+			<span>我是第三个</span>
+		</div>
+		<div>
+			<span>我是第四个</span>
+		</div>
+	</div>
+</body>
+<script>
+	for (var i=0;i--;){
+		alert(i);
+	}
+	
+	/*var out = document.getElementById('out');
+	var lis = out.getElementsByTagName('li');
+	var divs = out.getElementsByTagName('div');
+	for (var i=0 ; i<lis.length ; i++){
+		lis[i].onclick = function (){
+			for (var j=0 ; j<lis.length ; j++){
+				if (lis[j]==this){
+					divs[j].className='show';
+				}else {
+					divs[j].className = '';
+				}
+			}
+		}
+	}
+	
+	/*
+	lis[0].onmouseover = function(){
+		divs[0].className = 'show';
+		divs[1].className = '';
+		divs[2].className = '';
+		divs[3].className = '';
+	};
+	lis[1].onmouseover = function(){
+		divs[1].className = 'show';
+		divs[0].className = '';
+		divs[2].className = '';
+		divs[3].className = '';
+	};
+	lis[2].onmouseover = function(){
+		divs[2].className = 'show';
+		divs[1].className = '';
+		divs[0].className = '';
+		divs[3].className = '';
+	};
+	lis[3].onmouseover = function(){
+		divs[3].className = 'show';
+		divs[1].className = '';
+		divs[2].className = '';
+		divs[0].className = '';
+	}
+	*/
+</script>
+</html>

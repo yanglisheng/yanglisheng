@@ -1,0 +1,26 @@
+/**
+ * 针对现代浏览器
+ * 1. 设置content为空格是为了避免opera下的一个bug，该bug当除了document外
+ *    的任何地方添加了contenteditable节点时会触发。
+ *    不然会导致标签清完浮动后出现上下留白。
+ * 2. 使用table而非block的必要在于：‘：before’可以把子元素的top-margins包
+ *    含在内。
+ * 
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * 只针对ie6、7
+ * 下面的命令会触发hasLayout，从而包含浮动
+ */
+.cf {
+    *zoom: 1;
+}

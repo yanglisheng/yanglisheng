@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> tab可扩展版taoctt </title>
+	<meta name="Description" content="" />
+	<link rel="stylesheet" type="text/css" href="../css/compatible clearfix.css" />
+	<style>
+		*{margin:0;padding:0;list-style:none;}
+		.tab-nav {
+			width: 500px;
+			height: 50px;
+			margin: 20px auto 0;
+		}
+		.tab-nav span {
+			float: left;
+			width: 123px;
+			height: 48px;
+			line-height: 48px;
+			border: 1px solid red;
+			text-align: center;
+		}
+		.tab-nav .select {
+			background: red;
+		}
+		.tab-con div{
+			width: 498px;
+			height: 350px;
+			margin: 0 auto;
+			border: 1px solid blue;
+			font-size: 46px;
+			display: none;
+		}
+		.tab-con .show{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="tab-nav cf" id="tab-nav">
+		<span class="select">1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<!-- <span>5</span>
+		<span>6</span>
+		<span>7</span> -->
+	</div>
+	<div class="tab-con" id="tab-con">
+		<div class="show">1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<!-- <div>5</div>
+		<div>6</div>
+		<div>7</div> -->
+	</div>
+</body>
+<script>
+	var tab_nav = document.getElementById("tab-nav")
+	var btns = tab_nav.getElementsByTagName("span");
+	var cons = document.getElementById("tab-con").getElementsByTagName("div");
+	for (var i=0 ; i<btns.length ; i++){
+		var navWidth = parseInt(getStyle(tab_nav,'width'));
+		btns[i].style.width = (navWidth/btns.length-2)+'px';
+		btns[i].onclick = function(){
+			for (var j=0 ; j<btns.length ; j++){
+				if (this==btns[j]){
+					btns[j].className = 'select';
+					cons[j].className = 'show';
+				}else {
+					btns[j].className = '';
+					cons[j].className = '';
+				}
+			}
+		}
+	}
+	function getStyle(elem,pro) {  
+		elem = ('string'==typeof elem)?document.getElementById('elem'):elem;
+		if(!elem) return null;
+		if(elem.style[pro])  //内联
+			return elem.style[pro];  
+		else if(elem.currentStyle){  //IE
+			return elem.currentStyle[pro];    
+		} 
+		else if(window.getComputedStyle){  //W3C标准
+			var s=window.getComputedStyle(elem,null);
+			return s[pro];
+		}
+		else if(document.defaultView&&document.defaultView.getComputedStyle){ //FF,CHROME等
+			pro=pro.replace(/([A-Z])/g,"-$1"); //如marginLeft转为margin-Left
+			pro=pro.toLowerCase();   //再转为小写margin-left
+			var s=document.defaultView.getComputedStyle(elem,"");  
+			return s&&s.getPropertyValue(pro);  
+		}  
+		else return null;
+	}
+</script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 输入值改变div属性 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		fieldset {border:none;}
+		.out{
+			width: 600px;
+			margin: 20px auto;
+		}
+		input {
+			width: 100px;
+			height: 26px;
+		}
+		button {
+			width: 80px;
+			height: 28px;
+		}
+		.con {
+			width: 100%;
+			height: 300px;
+			margin: 20px 0;
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div class="out">
+		<form method="post" action="#">
+			<fieldset>
+				<legend>
+					<input type="text" value="请输入一个数值"/>
+					<button type="button" ><span>改变宽度</span></button>
+					<button type="button" ><span>改变高度</span></button>
+					<button type="button" ><span>改变背景色</span></button>
+				</legend>
+			</fieldset>
+		</form>
+		<div id="con" class="con"></div>
+	</div>
+</body>
+<script>
+	var input = document.getElementsByTagName("input")[0];
+	var btns = document.getElementsByTagName("button");
+	var con = document.getElementById("con");
+	input.onfocus = function (){
+		this.value = '';
+	}
+	btns[0].onclick = function (){
+		con.style.width = input.value + 'px';
+	}
+	btns[1].onclick = function (){
+		con.style.height = input.value + 'px';
+	}
+	btns[2].onclick = function (){
+		con.style.backgroundColor = '#'+input.value;
+	}
+</script>
+</html>
