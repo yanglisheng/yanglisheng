@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 大图滚动 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.con{
+			width:260px;
+			height:400px;
+			overflow:hidden;
+			margin:0 auto;
+		}
+		.con img{
+			width:260px;
+			height:400px;
+		}
+		.button{
+			width:260px;
+			text-align:center;
+			margin:10px auto;
+		}
+		.button input{
+			width:80px;
+			height:20px;
+			line-height:20px;
+		}
+		.nav{
+			width:260px;
+			text-align:center;
+			margin:10px auto;
+		}
+		.nav span{
+			display:inline-block;
+			width:40px;
+			height:40px;
+			line-height:40px;
+			border:1px solid red;
+			cursor:hand;
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="button">
+		<input type="button" value="向前一张"/>
+		<input type="button" value="向后一张"/>
+	</div>
+	<div class="con" id="con">
+		<table cellspacing ="0" cellpadding ="0">
+			<tr>
+				<td><img src="images/1.jpg" alt="1"/></td>
+				<td><img src="images/2.jpg" alt="2"/></td>
+				<td><img src="images/3.jpg" alt="3"/></td>
+				<td><img src="images/4.jpg" alt="4"/></td>
+				<td><img src="images/5.jpg" alt="5"/></td>
+			</tr>
+		</table>
+	</div>
+	<div class="nav" id="nav">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+	</div>
+</body>
+<script src ="js/tween.js"></script>
+<script>
+	var con = document.getElementById("con");
+	var prevBtn = document.getElementsByTagName("input")[0];
+	var nextBtn = document.getElementsByTagName("input")[1];
+	var navs = document.getElementsByTagName("span");
+	var autot = null;
+	var ind = 0;
+	window.onload = auto;
+	function getStyle(tag,prop){
+		var value;
+		if (prop in document.body.style){
+			if (window.getComputedStyle){
+				value = document.defaultView.getComputedStyle(tag,null)[prop];
+			}else {
+				value = tag.currentStyle[prop]
+			}
+		}else {
+			value = tag[prop];
+		}
+		value = parseFloat(value);
+		if (isNaN(value)){
+			value = 0;
+		}
+		return value;
+	}
+	function moveTo(dom, prop, end, duration){
+		var start = getStyle(dom,prop);
+		var n = 0;
+		var b = start;
+		var c = end - start;
+		var d = duration;
+		var tprop = "_t_" + prop;
+		if (dom[tprop]){
+			clearInterval(dom[tprop]);
+		}
+		dom[tprop] = setInterval(function(){
+			n ++;
+			if (n > d){
+				clearInterval(dom[tprop]);
+			}
+			var pos = Tween.Back.easeOut(n, b, c, d);
+			if (prop in document.body.style){
+				dom[prop] = pos + "px";
+			}else {
+				dom[prop] = pos;
+			}
+		},17)
+	}
+	function show(index){
+		moveTo(con, "scrollLeft", 260*index, 50);
+	}
+	function prev(){
+		ind --;
+		if (ind < 0){
+			ind = 4;
+		}
+		show(ind);
+	}
+	function next(){
+		ind ++;
+		if (ind > 4){
+			ind = 0;
+		}
+		show(ind);
+	}
+	function auto(){
+		autot = setInterval(function(){
+			ind ++;
+			if (ind > 4){
+				ind = 0;
+			}
+			show(ind);
+		},3000);
+	}
+	function clearauto(){
+		clearInterval(autot);
+		autot = setTimeout(auto,17);
+	}	
+	prevBtn.onclick = function(){
+		prev();
+		clearauto();
+	};
+	nextBtn.onclick = function(){
+		next();
+		clearauto();
+	}
+	for (var i = 0 ; i < navs.length ; i++){
+		navs[i].index = i;
+		navs[i].onclick = function(){
+			ind = this.index;
+			show(this.index);
+			clearauto();
+		}
+	}
+</script>
+</html>
