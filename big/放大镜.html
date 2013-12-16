@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 放大镜 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.sma{
+			float:left;
+			width:350px;
+			height:350px;
+			border:10px solid red;
+			background:url(images/600D.jpg) 0 0 no-repeat;
+			margin-right:10px;
+		}
+		.con{
+			width:175px;
+			height:175px;
+			cursor:move;
+			background-color:#fede4f;
+			opacity:0.5;
+			filter:	alpha(opacity = 50);
+			display:none;
+			float:left;
+		}
+		.big{
+			float:left;
+			width:400px;
+			height:400px;
+			background-image:url(images/600DB.jpg);
+			display:none;
+		}	
+	</style>
+</head>
+<body>
+	<div id="sma" class="sma">
+		<div id="con" class="con">			
+		</div>
+	</div>
+	<div id="big" class="big">
+	</div>
+	<script>
+		var sma = document.getElementById("sma");
+		var con = document.getElementById("con");
+		var big = document.getElementById("big");
+		var t = null;
+		sma.onmousemove = function(e){
+			t = setTimeout(function(){
+				con.style.display = "block";
+				big.style.display = "block";
+			},17);	
+			var e = e || window.event;
+			var nowX = e.clientX - con.offsetWidth/2;
+			var nowY = e.clientY - con.offsetHeight/2;
+			var num = big.clientWidth/con.clientWidth;
+			if (nowX <= 0){
+				nowX = 0;
+			}
+			if (nowX >= (sma.clientWidth - con.offsetWidth)){
+				nowX = sma.clientWidth - con.offsetWidth;
+			}
+			if (nowY <= 0){
+				nowY = 0;
+			}
+			if (nowY >= sma.clientHeight - con.offsetHeight){
+				nowY = sma.clientHeight - con.offsetHeight;
+			}
+			con.style.marginLeft = nowX + "px";
+			con.style.marginTop = nowY + "px";
+			big.style.backgroundPosition = (- nowX * num) + "px" + " " + (- nowY * num) + "px";
+		}	
+		sma.onmouseout = function(){
+			t = setTimeout(function(){
+				con.style.display = "none";
+				big.style.display = "none";
+			},17);			
+		}
+	</script>
+</body>
+</html>
