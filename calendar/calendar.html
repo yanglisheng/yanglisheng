@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 日历 </title>
+	<meta name="Description" content="" />
+	<link rel="stylesheet" type="text/css" href="css/compatible clearfix.css"/>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.calendar{
+			width:212px;
+			margin:20px auto;
+		}
+		.head{
+			width:212px;
+			height:30px;
+			line-height:30px;
+			text-align:center;
+			font-size:16px;
+			background-color:#f4f4f4;
+		}
+		.head b{
+			float:left;
+			width:20px;
+			height:30px;
+			background:url(images/left.jpg) 0 6px no-repeat;
+			cursor:hand;
+			cursor:pointer;
+		}
+		.head i{
+			float:right;
+			width:20px; 
+			height:30px;
+			background:url(images/right.jpg) 0 6px no-repeat;
+			cursor:hand;
+			cursor:pointer;
+		}
+		.calendar ul{
+			width:210px;
+			height:150px;
+			border:1px solid #f4f4f4;
+			border-top:none;
+		}
+		.calendar li{
+			float:left;
+			width:30px;
+			height:30px;
+			text-align:center;
+			line-height:30px;
+			font-size:14px;
+			list-style:none;
+		}
+	</style>
+</head>
+<body>
+	<div class="calendar" id="calendar">
+		<div class="head" id="head">
+			<b>&nbsp;</b>
+			<span></span>
+			<i>&nbsp;</i>
+		</div>
+		<ul class="cf">			
+		</ul>
+	</div>
+	<script>
+		function setMonth(year,i){
+			var top = document.getElementById("head").getElementsByTagName("span")[0];
+			var leftBtn = document.getElementById("head").getElementsByTagName("b")[0];
+			var rightBtn = document.getElementById("head").getElementsByTagName("i")[0];
+			var ul = document.getElementById("calendar").getElementsByTagName("ul")[0];
+			var dayCount = 0;
+			var str = "";
+			updateTop();
+			getDaycount();				
+			getStr();
+
+			function updateTop(){
+				if ((i + 1) < 10){
+					top.innerHTML = year + "年" + 0 + (i+1) + "月";
+				}else {
+					top.innerHTML = year + "年" + (i+1) + "月";
+				}
+			}
+
+			function getDaycount(){
+				var time = new Date(year,(i+1));				
+				time.setDate(0);
+				dayCount = time.getDate();
+				return dayCount;
+			}
+
+			function getStr(){
+				for (var j = 0; j < dayCount; j++){
+					str += "<li>" + (j+1) + "</li>"
+				}
+				ul.innerHTML = str;
+			}
+
+			leftBtn.onclick = function(){
+				ul.innerHTML = "";
+				str = "";
+				i --;				
+				if (i < 0){
+					i = 11;
+					year -= 1;
+				}
+				updateTop();
+				getDaycount();				
+				getStr();
+			}
+
+			rightBtn.onclick = function(){
+				ul.innerHTML = "";
+				str = "";
+				i ++;				
+				if (i > 11){
+					i = 0;
+					year += 1;
+				}
+				updateTop();
+				getDaycount();				
+				getStr();
+			}
+		}
+		
+		setMonth(2018,1);
+	</script>
+</body>
+</html>

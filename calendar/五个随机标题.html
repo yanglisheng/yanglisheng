@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 五个随机标题 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		div{
+			width:200px;
+			margin:30px auto;
+		}
+		span{
+			float:left;
+			width:200px;
+			height:30px;
+			text-align:center;
+			line-height:30px;
+			font-size:14px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		
+	</div>
+</body>
+<script>
+	var arr = []; // 创建数组保存100条新闻标题
+	var div = document.getElementsByTagName("div")[0];
+	var str = ""; // 用于自动生成span标签
+	var tit = []; // 创建数组保存随机生成的0-99的数
+	var test = []; // 将tit数组里的数从小到大排列 方便测试tit里的数是否重复
+	for (var i = 0; i < 100; i ++){
+		arr[i] = "第" + (i+1) + "条新闻标题";
+	}
+	
+	for (var i = 0; i < 100; i ++){
+		tit[i] = Math.round(Math.random() * 99);
+		for (var j = 0; j < i; j ++){
+			if (tit[i] == tit[j]){
+				i --;
+				break;
+			}
+		}
+	}
+
+	test = tit.sort(function(a,b){return a-b;}); // 将tit数组里的数从小到大排列
+	
+	for (var i = 0; i < 100; i++){
+		str += "<span>" + arr[test[i]] + "</span>";
+	}
+
+	div.innerHTML = str;
+</script>
+</html>
