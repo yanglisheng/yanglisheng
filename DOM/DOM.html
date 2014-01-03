@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> DOM练习 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.test{
+			width:300px;
+			height:100px;
+			margin:0 auto;
+			text-align:center;
+			line-height:100px;
+		}
+		.button{
+			width:300px;
+			margin:0 auto;
+		}
+		.button span{
+			float:left;
+			width:98px;
+			height:40px;
+			text-align:center;
+			line-height:20px;
+			font-size:14px;
+			border:1px solid red;
+			cursor:hand;
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="test" id="test">
+		<span>姓名</span>
+		<span>年龄</span>
+		<span>性别</span>
+	</div>
+	<div class="button" id="button">
+		<span>添加内容为身高的标签</span>
+		<span>在姓名后面添加身高</span>
+		<span>添加身高并替换掉性别</span>
+		<span>全部删除</span>
+		<span>删除所有子节点</span>
+		<span>给span颜色变红</span>
+	</div>
+	<script>
+		var test = document.getElementById("test");
+		var Btns = document.getElementById("button").getElementsByTagName("span");
+		Btns[0].onclick = function(){
+			var strong = document.createElement("strong");
+			strong.innerHTML = "身高";
+			test.appendChild(strong);
+		}
+		Btns[1].onclick = function(){
+			var strong = document.createElement("strong");
+			strong.innerHTML = "身高";
+			test.insertBefore(strong,test.childNodes[3]);
+		}
+		Btns[2].onclick = function(){
+			var strong = document.createElement("strong");
+			strong.innerHTML = "身高";
+			test.replaceChild(strong,test.childNodes[5])
+		}
+		Btns[3].onclick = function(){
+			test.parentNode.removeChild(test);
+		}
+		Btns[4].onclick = function(){
+			var children = test.childNodes;
+			for (var i = 0; i < children.length; i ++){
+				test.removeChild(children[i]);
+			}
+		}
+		Btns[5].onclick = function(){
+			var spans = test.querySelectorAll("span");
+			for (var i = 0; i < spans.length; i ++){
+				spans[i].style.color = "red";
+			}
+		}
+	</script>
+</body>
+</html>

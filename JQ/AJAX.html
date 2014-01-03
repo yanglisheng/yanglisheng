@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> AJAX </title>
+	<meta name="Description" content="" />
+	<style>
+		span{
+			display:block;
+			cursor:hand;
+			cursor:pointer;
+			width:60px;
+			height:20px;
+			text-align:center;
+			line-height:20px;
+			font-size:16px;
+		}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		
+	</ul>
+	<span>下一页</span>
+</body>
+<script src="../js/jquery.js"></script>
+<script>
+	setTimeout(function(){
+		var page = 0;
+		$("span").click(function(){
+			page ++;
+			$.ajax({
+				url : "http://localhost/big/data" + page + ".json",
+				type : "get",
+				success : function(data+page){
+					var html = "";
+					for (var i = 0; i < (data+page).length; i ++){
+						html += "<li>" + (data+page)[i] + "</li>";
+					}
+					$(html).appendTo("#list");
+				},
+				error : function(){
+					alert("error!")
+				}
+			})
+		})		
+	},1000);
+</script>
+</html>

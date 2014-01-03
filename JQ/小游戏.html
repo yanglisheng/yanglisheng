@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 表单提交 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		table{
+			width:400px;
+			height:400px;
+			border-collapse:collapse;
+			margin:50px auto;
+		}
+		table td{
+			width:40px;
+			height:40px;
+			border: 1px solid red;
+		}
+		.add{
+			background:#b80000;
+		}
+		span,button{
+			width:120px;
+			height:30px;
+			text-align:center;
+			line-height:30px;
+			display:block;
+			margin:20px auto -20px;
+			font-size:24px;
+			cursor:hand;
+			cursor:pointer;
+		}
+		strong{
+			position:absolute;
+			width:160px;
+			height:30px;
+			text-align:center;
+			line-height:30px;
+			left:480px;
+			bottom:-40px;
+			cursor:hand;
+			cursor:pointer;
+			border:1px solid green;
+			font-size:18px;
+		}
+		#test{
+			position:relative;
+		}
+	</style>
+</head>
+<body>
+	<span></span>
+	<div id="test">
+		<strong>烦了吧？点这里！</strong>
+	</div>
+	<button type="button" id="Btn">悔一步</button>
+</body>
+<script>
+	var table = null;
+	var tr = null;
+	var td = null;
+	var div = document.getElementById("test");
+	table = document.createElement("table");
+	for (var i = 0; i < 10; i ++){
+		tr = document.createElement("tr");
+		table.appendChild(tr);
+		for (var j = 0; j < 10; j ++){
+			td = document.createElement("td");
+			tr.appendChild(td);
+		}
+	}
+	div.appendChild(table);
+	var tds = document.getElementsByTagName("td");
+	var len = tds.length;
+	var span = document.getElementsByTagName("span")[0];
+	var strong = document.getElementsByTagName("strong")[0];
+	var num = 0;
+	var go = null;
+	var now = null;
+	var Btn = document.getElementById("Btn");
+	span.innerHTML = "第" + num + "步";	
+	strong.onclick = function(){
+		for (var i = 0 ; i < len; i ++){
+			tds[i].className = "add";
+		}		
+	}
+	for (var i = 0 ; i < len; i ++){
+		tds[i].onclick = function(){
+			now = true;
+			num ++;
+			span.innerHTML = "第" + num + "步";
+			for (var j = 0 ; j < len; j ++){
+				tds[j].index = j;
+				if (this == tds[j]){
+					Btn.onclick = function(){
+						if (now){
+							now = false;
+							num --;
+							span.innerHTML = "第" + num + "步";
+							if (go == 0){						
+								own(go);
+								next(go);
+								nextline(go);
+							}else if (go == 90){
+								own(go);
+								next(go);
+								prevline(go);
+							}else if (go == 9){
+								own(go);
+								prev(go);
+								nextline(go);
+							}else if (go == 99){
+								own(go);
+								prev(go);
+								prevline(go);
+							}else if (go % 10 == 0){
+								own(go);
+								next(go);
+								prevline(go);
+								nextline(go);
+							}else if (go % 10 == 9){
+								own(go);
+								prev(go);
+								prevline(go);
+								nextline(go);
+							}else if (go < 9){
+								own(go);
+								prev(go);
+								next(go);
+								nextline(go);
+							}else if (go > 90){
+								own(go);
+								prev(go);
+								next(go);
+								prevline(go);
+							}else{						
+								own(go);
+								nextline(go);
+								prev(go);
+								next(go);
+								prevline(go);
+							}		
+						}else {
+							alert("只许悔一步哦，亲！");
+						}		
+					}
+					function own(j){
+						if (tds[j].className == "add"){
+							tds[j].className = "";
+						}else {
+							tds[j].className = "add";
+						}
+					}
+					function next(j){
+						if (tds[j+1].className == "add"){
+							tds[j+1].className = "";
+						}else {
+							tds[j+1].className = "add";
+						}
+					}
+					function prev(j){
+						if (tds[j-1].className == "add"){
+							tds[j-1].className = "";
+						}else {
+							tds[j-1].className = "add";
+						}
+					}
+					function prevline(j){
+						if (tds[(j-10)].className == "add"){
+							tds[(j-10)].className = "";
+						}else {
+							tds[(j-10)].className = "add";
+						}
+					}
+					function nextline(j){
+						if (tds[(j+10)].className == "add"){
+							tds[(j+10)].className = "";
+						}else {
+							tds[(j+10)].className = "add";
+						}
+					}
+					if (j == 0){						
+						own(j);
+						next(j);
+						nextline(j);
+						go = j;
+					}else if (j == 90){
+						own(j);
+						next(j);
+						prevline(j);
+						go = j;
+					}else if (j == 9){
+						own(j);
+						prev(j);
+						nextline(j);
+						go = j;
+					}else if (j == 99){
+						own(j);
+						prev(j);
+						prevline(j);
+						go = j;
+					}else if (j % 10 == 0){
+						own(j);
+						next(j);
+						prevline(j);
+						nextline(j);
+						go = j;
+					}else if (j % 10 == 9){
+						own(j);
+						prev(j);
+						prevline(j);
+						nextline(j);
+						go = j;
+					}else if (j < 9){
+						own(j);
+						prev(j);
+						next(j);
+						nextline(j);
+						go = j;
+					}else if (j > 90){
+						own(j);
+						prev(j);
+						next(j);
+						prevline(j);
+						go = j;
+					}else{						
+						own(j);
+						nextline(j);
+						prev(j);
+						next(j);
+						prevline(j);
+						go = j;
+					}					
+				}
+			}
+			for (var z = 0; z < len; z ++){
+				if (tds[z].className == "add"){
+					if (z == (len - 1)){
+						alert('成功！')
+					}
+				}else {
+					break;
+				}
+			}
+		}
+	}
+	
+</script>
+</html>

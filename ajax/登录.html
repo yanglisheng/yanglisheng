@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 注册 </title>
+	<meta name="Description" content="" />
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.wrapper,.content{
+			width:800px;
+			height:524px;
+			margin:20px auto;			
+		}
+		.wrapper{
+			background:url(images/bac.jpg) 0 0 no-repeat;
+		}
+		.content{
+			background:url(images/wbac.jpg) 0 0 no-repeat;
+			display:none;
+		}
+		.load,.regist{
+			float:right;
+			width:185px;
+			height:100px;
+			border:1px solid #cfb6ae;
+			border-radius:5px;
+			margin:20px 20px 0 0;
+			padding:20px 0 0 15px;
+			font-size:16px;
+		}
+		form{
+			width:160px;
+		}
+		input{
+			width:100px;
+			margin-bottom:10px;
+		}
+		button{
+			width:50px;
+		}
+		#l-regist{
+			margin-left:50px;
+		}
+		#r-regist{
+			margin-left:40px;
+		}
+		.regist{
+			display:none;
+		}
+		.show{
+			display:block;
+		}
+		.own{
+			width:60%;
+			padding-top:20px;
+			margin-left:30px;
+			float:left;
+		}
+		.own h2{
+			width:100%;
+			height:36px;
+			line-height:36px;
+			text-align:center;
+			font-size:30px;
+			margin-bottom:20px;
+		}
+		.own ul{
+			width:472px;
+			height:175px;
+			overflow:auto;
+			list-style:none;
+			padding-left:10px;
+			font-size:20px;
+		}
+		.own li{
+			border:1px solid red;
+			width:470px;
+			line-height:24px;
+			word-break:break-all;
+			display:block;
+		}
+		.own button{
+			float:right;
+			margin-top:10px;
+		}
+		#logout{
+			margin-top:10px;
+			float:right;
+		}
+		.others{
+			float:right;
+			width:35%;
+			text-align:center;
+			font-size:14px;
+		}
+		.others ul{
+			list-style:none;
+		}
+		/* 微博发布 */ 
+		.own div{
+			width:100%;
+			height:200px;
+		}
+		.own textarea{
+			width:100%;
+			height:150px;
+			resize:none;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="load">
+			<form>
+				<span>用户名:</span><input type="text" id="l-name"/>
+				<span>密&nbsp;&nbsp;码:</span><input type="password" id="l-wd"/>
+				<button type="button" id="l-load">登陆</button>
+				<button type="button" id="l-regist">注册</button>
+			</form>
+		</div>
+		<div class="regist">
+			<form>
+				<span>用户名:</span><input type="text" id="r-name"/>
+				<span>密&nbsp;&nbsp;码:</span><input type="password" id="r-wd"/>
+				<button type="button" id="r-regist">注册</button>
+			</form>
+		</div>
+	</div>
+	<div class="content">
+		<div class="own">
+			<h2>的个人微博</h2>
+			<div>
+				<textarea></textarea>
+				<button type="button" id="send">发布</button>
+			</div>
+			<ul>
+				<li>1</li>
+				<li>1</li>
+				<li>1</li>
+				<li>1</li>
+				<li>1</li>				
+			</ul>
+			<button type="button" id="next">下一页</button>
+		</div>
+		<button type="button" id="logout">退出</button>
+		<div class="others">
+			<h3>微博好友列表</h3>
+			<ul>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	<script src="js/jquery.js"></script>
+	<script>
+		
+		/* 登陆界面点注册 */
+
+		$("#l-regist").click(function(){
+			$("#l-name").val("");
+			$("#l-wd").val("");
+			$("#r-name").val("");
+			$("#r-wd").val("");
+			$(".load").css("display","none");
+			$(".regist").css("display","block");
+		});
+
+		/* 注册界面点注册 */
+
+		$("#r-regist").click(function(){
+			var $name = $("#r-name").val(),
+				$password = $("#r-wd").val();
+			$.ajax({
+				url : "http://ajaxh518.taobaoxyz.com/api/user/?method=regist&name=" + $name + "&password=" + $password,
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						alert("注册成功，可以登陆了！");
+						$(".regist").css("display","none");
+						$(".load").css("display","block");
+					}else {
+						if (data.code == 0){
+							alert(data.message)
+						}
+						if (data.code == 1){
+							alert("请填写完整的用户名和密码！")
+						}
+						if (data.code == 2){
+							alert("用户名重复，请更换用户名！");
+						}
+					}
+				}
+			})
+		});
+
+		/* 点击登陆 */
+
+		$("#l-load").click(function(){
+			var $name =  $("#l-name").val(),
+				$password = $("#l-wd").val();
+			$.ajax({
+				url : "http://ajaxh518.taobaoxyz.com/api/user/?method=login&name=" + $name + "&password=" + $password,
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						$(".wrapper").css("display","none");
+						$(".content").css("display","block");
+						var $span = $("<span>" + $name + "</span>");
+						$span.prependTo($(".own h2"));
+					}else {
+						alert(data.message);
+					}
+				}
+			})
+		})
+
+		/* 点击退出 */
+
+		$("#logout").click(function(){
+			var $name =  $("#l-name").val(),
+				$password = $("#l-wd").val();
+			$.ajax({
+				url : "http://ajaxh518.taobaoxyz.com/api/user/?method=logout&name=" + $name + "&password=" + $password,
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						alert("退出成功！");
+						$(".wrapper").css("display","block");
+						$(".content").css("display","none");
+						$(".own h2 span").remove();
+					}
+				}
+			})
+		})
+
+		/* 点击发布 */
+
+		$("#send").click(function(){
+			var	$text = $("textarea").val();
+			$.ajax({
+				url : "http://ajaxh518.taobaoxyz.com/api/msg/?method=add&text=" + $text,
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						alert("发布成功！");
+						$("<li><span>" + $text + "</span></li>").prependTo($(".own ul"));
+						$("textarea").val("");
+					}
+				}
+			})
+		})
+	</script>
+</body>
+</html>

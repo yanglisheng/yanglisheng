@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <style>
+	p{cursor:pointer;cursor:hand;}
+	/*
+		要求：一系列的多选框，两个按钮，一个按钮实现全选功能，另一个按钮实现反选（原来没选中的现在选中，原来选中的现在取消  提示：设置input.checkd=true;即可将某个复选框选中）
+	*/
+  </style>
+ </head>
+
+ <body>
+	<input type="checkbox" name="checkbox" value=""/><span>苹果</span>
+	<input type="checkbox" name="checkbox" value=""/><span>橘子</span>
+	<input type="checkbox" name="checkbox" value=""/><span>香蕉</span>
+	<input type="checkbox" name="checkbox" value=""/><span>西瓜</span>
+	<input type="checkbox" name="checkbox" value=""/><span>榴莲</span>
+	<input type="checkbox" name="checkbox" value=""/><span>山竹</span>
+	<input type="checkbox" name="checkbox" value=""/><span>葡萄</span>
+	<input type="checkbox" name="checkbox" value=""/><span>蜜桃</span>
+	<input type="checkbox" name="checkbox" value=""/><span>菠萝</span>
+	<input type="checkbox" name="checkbox" value=""/><span>番茄</span>
+	<input type="checkbox" name="checkbox" value=""/><span>蜜瓜</span>
+	<input type="checkbox" name="checkbox" value=""/><span>火果</span>
+	<input type="checkbox" name="checkbox" value=""/><span>金桔</span>
+	<input type="checkbox" name="checkbox" value=""/><span>柿子</span>
+	<p class="selectAll">全选</p>
+	<p class="reverse">反选</p>
+
+  <script src="../js/jquery.js" type="text/javascript"></script>
+  
+  <script>
+	$(".selectAll").click(function (){
+		$(":checkbox").attr("checked","true");
+	});
+	$(".reverse").click(function(){
+		//$(":checked").removeAttr("checked").siblings().attr("checked","true");
+		$("[name='checkbox']").each(function(){
+		   /*if($(this).attr("checked")){
+			  $(this).removeAttr("checked");
+		   }else{
+			  $(this).attr("checked",'true');
+		   }*/
+		   this.checked=!this.checked;
+		});
+	});
+  </script>
+ </body>
+</html>

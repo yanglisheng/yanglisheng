@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 新浪微博效果 </title>
+	<meta name="Description" content="" />
+	<link rel="stylesheet" type="text/css" href="../css/compatible clearfix.css"/>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		form{
+			width:300px;
+			margin:20px auto 0;
+		}
+		h2{
+			font-size:14px;
+		}
+		textarea{
+			width:300px;
+			height:100px;
+			overflow:hidden;
+			outline:none;
+			resize:none;
+		}
+		button{
+			float:right;
+			width:50px;
+			height:30px;
+			line-height:30px;			
+		}
+		.con{
+			clear:both;
+			width:300px;
+			height:400px;
+			margin:0 auto;
+			border:1px solid #a4a4a4;
+		}
+	</style>
+</head>
+<body>
+	<form method="post" class ="cf">
+		<h2>有什么新鲜事想告诉大家？</h2>		
+		<textarea placeholder="请在这输入..."></textarea>
+		<button type="button"><span>发布</span></button>
+	</form>
+	<div class="con" id="con">
+		
+	</div>
+	<script>
+		var text = document.getElementsByTagName("textarea")[0];
+		var Btns = document.getElementsByTagName("button")[0];
+		var con = document.getElementById("con");
+		Btns.onclick = function(){
+			var div = document.createElement("div");
+			var span = document.createElement("span");
+			var em = document.createElement("em");
+			var delectB = document.createElement("var");
+			var now = new Date();
+			span.innerHTML = text.value;
+			em.innerHTML = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+			delectB.innerHTML = "删除";
+			delectB.className = "delect";
+			div.appendChild(span);
+			div.appendChild(em);
+			div.appendChild(delectB);
+			con.appendChild(div);
+		}
+		function delect(e){
+			var e = e || window.event;
+			var target = e.target || e.srcElement;
+			if (target.className == "delect"){
+				target.parentNode.parentNode.removeChild(target.parentNode);
+			}
+		}
+		document.body.onclick = delect;
+	</script>
+</body>
+</html>
