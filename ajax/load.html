@@ -9,17 +9,14 @@
 			margin:0;
 			padding:0;
 		}
-		.wrapper,.content{
-			width:800px;
-			height:524px;
-			margin:20px auto;			
+		ul,li{
+			list-style:none;
 		}
 		.wrapper{
-			background:url(images/bac.jpg) 0 0 no-repeat;
-		}
-		.content{
-			background:url(images/wbac.jpg) 0 0 no-repeat;
-			display:none;
+			width:800px;
+			height:524px;
+			margin:20px auto;
+			background:url(images/bac.jpg) 0 0 no-repeat;			
 		}
 		.load,.regist{
 			float:right;
@@ -50,65 +47,6 @@
 		.regist{
 			display:none;
 		}
-		.show{
-			display:block;
-		}
-		.own{
-			width:60%;
-			padding-top:20px;
-			margin-left:30px;
-			float:left;
-		}
-		.own h2{
-			width:100%;
-			height:36px;
-			line-height:36px;
-			text-align:center;
-			font-size:30px;
-			margin-bottom:20px;
-		}
-		.own ul{
-			width:472px;
-			height:175px;
-			overflow:auto;
-			list-style:none;
-			padding-left:10px;
-			font-size:20px;
-		}
-		.own li{
-			border:1px solid red;
-			width:470px;
-			line-height:24px;
-			word-break:break-all;
-			display:block;
-		}
-		.own button{
-			float:right;
-			margin-top:10px;
-		}
-		#logout{
-			margin-top:10px;
-			float:right;
-		}
-		.others{
-			float:right;
-			width:35%;
-			text-align:center;
-			font-size:14px;
-		}
-		.others ul{
-			list-style:none;
-		}
-		/* 微博发布 */ 
-		.own div{
-			width:100%;
-			height:200px;
-		}
-		.own textarea{
-			width:100%;
-			height:150px;
-			resize:none;
-		}
 	</style>
 </head>
 <body>
@@ -129,34 +67,27 @@
 			</form>
 		</div>
 	</div>
-	<div class="content">
-		<div class="own">
-			<h2>的个人微博</h2>
-			<div>
-				<textarea></textarea>
-				<button type="button" id="send">发布</button>
-			</div>
-			<ul>
-				<li>1</li>
-				<li>1</li>
-				<li>1</li>
-				<li>1</li>
-				<li>1</li>				
-			</ul>
-			<button type="button" id="next">下一页</button>
-		</div>
-		<button type="button" id="logout">退出</button>
-		<div class="others">
-			<h3>微博好友列表</h3>
-			<ul>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
-	</div>
 	<script src="js/jquery.js"></script>
 	<script>
-		
+		/* 获取用户信息 */
+
+		function getinfo(){
+			$.ajax({
+				url : "http://ajaxh518.taobaoxyz.com/api/user/?method=getinfo",
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						window.location.href = "weibo.html";
+					}
+				},
+				error : function(){
+					alert("加载失败！");
+				}
+			})
+		}		
+		getinfo();
 		/* 登陆界面点注册 */
 
 		$("#l-regist").click(function(){
@@ -210,16 +141,13 @@
 				jsonp : "jsoncb",
 				success : function(data){
 					if (data.done){
-						$(".wrapper").css("display","none");
-						$(".content").css("display","block");
-						var $span = $("<span>" + $name + "</span>");
-						$span.prependTo($(".own h2"));
+						getinfo();
 					}else {
 						alert(data.message);
 					}
 				}
 			})
-		})
+		})		
 
 		/* 点击退出 */
 
@@ -232,11 +160,9 @@
 				dataType : "jsonp",
 				jsonp : "jsoncb",
 				success : function(data){
-					if (data.done){
+					if (data.done){						
+						window.location.href = "load.html";
 						alert("退出成功！");
-						$(".wrapper").css("display","block");
-						$(".content").css("display","none");
-						$(".own h2 span").remove();
 					}
 				}
 			})
@@ -254,8 +180,7 @@
 				success : function(data){
 					if (data.done){
 						alert("发布成功！");
-						$("<li><span>" + $text + "</span></li>").prependTo($(".own ul"));
-						$("textarea").val("");
+						getinfo();
 					}
 				}
 			})
