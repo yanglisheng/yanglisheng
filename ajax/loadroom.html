@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 简易聊天室 </title>
+	<meta name="Description" content="" />
+	<style>
+		* {
+			padding:0;
+			margin:0;
+		}
+		table {
+			border-collapse:collapse;
+			border-spacing:0;
+		}
+		fieldset,img {
+			border:0;
+		}
+		input,select,textarea {
+			font-size:12px;
+		}
+		ol,ul {
+			list-style:none;
+		}
+		body {
+			margin:0 auto;
+			text-align:center;
+			font-size:12px;
+			font-family:Geneva,Arial,Helvetica,sans-serif;
+			background:url(iamges/allbg.jpg) repeat-y center #c0b7a9;
+		}
+		.allbg {
+			background:url(images/accountallbg.jpg) repeat-y center;
+			color:#573319;
+		}
+		.wrapper {
+			margin:0 auto;
+			width:1002px;
+			text-align:left;
+		}
+		.account_header {
+			position:relative;
+			height:166px;
+		}
+		.speakbox {
+			position:absolute;
+			width:370px;
+			height:95px;
+			left:254px;
+			top:48px;
+			padding:15px 20px 0 20px;
+			line-height:20px;
+			background:url(images/dialogbox.jpg) no-repeat;
+		}
+		.npc {
+			position:absolute;
+			top:0;
+			right:43px;
+			width:290px;
+			height:215px;
+			background:url(images/npc.jpg) no-repeat;
+		}
+		.account_maintitle {
+			height:30px;
+			padding:80px 0 0 150px;
+			text-indent:-10000px;
+			background:url(images/main_top.jpg) no-repeat;
+			overflow:hidden;
+		}
+		.account_maintitle span {
+			display:block;
+			width:229px;
+			height:20px;
+			background:url(images/titlesprite.jpg) no-repeat;
+		}
+		/* 登陆窗口 */
+		.account_container {
+			background:url(images/mainrepeat.jpg) repeat-y center;
+		}
+		.account_contop {
+			background:url(images/maincon_top.jpg) no-repeat top center;
+		}
+		.account_con {
+			padding-bottom:200px;
+			background:url(images/main_btm.jpg) no-repeat bottom center;
+			zoom:1;
+		}
+		.table_accountform {
+			line-height:40px;
+			width:800px;
+			margin:0 auto;
+			background:url(images/tron_bg.gif) repeat-y;
+		}
+		.table_accountform td {
+			line-height:40px;
+		}
+		.table_accountform tbody th {
+			width:35%;
+			line-height:40px;
+			color:#573319;
+		}
+		.table_accountform .itext {
+			width:195px;
+			height:17px;
+			padding-top:3px;
+			border:#98724d 1px solid;
+			background-color:#e8dbcc;
+			margin:0 10px;
+		}
+		.table_accountform tfoot td {
+			padding-top:10px;
+			line-height:25px;
+		}
+		.table_accountform .inputtr {
+			width:200px;
+		}
+		.textr {
+			text-align:right;
+		}
+		.btn_reg {
+			width:206px;
+			height:27px;
+			border:none;
+			cursor:pointer;
+			margin-left:280px;
+			text-align:center;
+			background:url(images/btn.gif) no-repeat;
+		}
+		.mask {
+			background-color: #000;
+			opacity: 0.5;
+			filter: alpha(opacity=50);
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 50;
+		}
+		.mask .table_accountform{
+			background:#a98c6e;
+		}
+		.regist{
+			position:absolute;
+			top:276px;
+			left:275px;
+		}
+	</style>
+</head>
+<body class="allbg">
+	<div class="wrapper">
+		<div class="account_header">
+			<div class="speakbox">
+				<span>欢迎来到简易聊天室！请先登陆。</span>
+			</div>
+			<div class="npc">
+				
+			</div>
+		</div>
+		<h1 class="account_maintitle"><span class="title_join">JOIN NOW FOR FREE!</span></h1>
+		<div class="account_container">
+			<div class="account_contop">
+				<div class="account_con">
+					<form id="reg_form">
+						<table class="table_accountform" cellpadding="0" cellspacing="0" border="0">
+							<tbody>
+								<tr>
+									<th class="textr">
+										<label>
+											用户名:
+										</label>
+									</th>
+									<td class="inputtr">
+										<input type="text" class="itext" id="l-name"/>
+									</td>									
+								</tr>
+								<tr class="tr_on">
+									<th class="textr">
+										<label>
+											密码:
+										</label>
+									</th>
+									<td>
+										<input type="password" class="itext" id="l-pwd"/>
+									</td>
+								</tr>
+								<tr>
+									<th class="textr">
+										<label>
+											确认密码:
+										</label>
+									</th>
+									<td>
+										<input type="password" class="itext" id="c_pwd"/>
+									</td>
+								</tr>
+						</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="3">
+										<button type="button" class="btn_reg" id="load">登陆</button>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" class="bt">
+										<button type="button" class="btn_reg" id="l-regist">注册</button>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</form>
+				</div>				
+			</div>
+		</div>
+		<div class="mask">
+			<div class="regist">
+				<form id="reg_form">
+					<table class="table_accountform" cellpadding="0" cellspacing="0" border="0">
+						<tbody>
+							<tr>
+								<th class="textr">
+									<label>
+										用户名:
+									</label>
+								</th>
+								<td class="inputtr">
+									<input type="text" class="itext" id="r-name"/>
+								</td>									
+							</tr>
+							<tr class="tr_on">
+								<th class="textr">
+									<label>
+										密码:
+									</label>
+								</th>
+								<td>
+									<input type="password" class="itext" id="r-pwd"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="textr">
+									<label>
+										昵称:
+									</label>
+								</th>
+								<td>
+									<input type="text" class="itext" id="nickname"/>
+								</td>
+							</tr>
+					</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="3">
+									<button type="button" class="btn_reg">登陆</button>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" class="bt">
+									<button type="button" class="btn_reg" id="r-regist">注册</button>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script src="js/jquery.js"></script>
+	<script>
+		$(".mask").hide();
+		$("#l-regist").click(function(){
+			$(".mask").css("width",$(window).width());
+			$(".mask").css("height",$(window).height());
+			$(".mask").show();
+			$(".account_con .textr").css("visibility","hidden");
+			$("#load").css("visibility","hidden");
+		});
+
+		function getinfo(){
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/user/?method=getinfo",
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					console.log(data);
+				}
+			})
+		}
+		getinfo();
+		$("#r-regist").click(function(){
+			var name = $("#r-name").val();
+			var pwd = $("#r-pwd").val();
+			var nickname = $("#nickname").val();
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/user/?method=regist&name=" + name + "&password=" + pwd + "&nickname=" + nickname,
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						alert("注册成功！");
+						$(".mask").hide();
+						$(".account_con .textr").css("visibility","");
+						$("#load").css("visibility","");
+					}
+				}
+			})
+		});
+
+		$("#load").click(function(){
+			var name = $("#l-name").val();
+			var pwd = $("#l-pwd").val();
+			var c_pwd = $("#c-pwd").val();
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/user/?method=login&name=" + name + "&password=" + pwd,
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						alert("登陆成功！");
+						window.location.href = "sendroom.html";
+					}
+				}
+			})
+		});
+	</script>
+</body>
+</html>

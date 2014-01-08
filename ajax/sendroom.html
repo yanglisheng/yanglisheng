@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset='utf-8' />
+	<title> 表单提交 </title>
+	<meta name="Description" content="" />
+	<style>
+		* {
+			padding:0;
+			margin:0;
+		}
+		table {
+			border-collapse:collapse;
+			border-spacing:0;
+		}
+		fieldset,img {
+			border:0;
+		}
+		input,select,textarea {
+			font-size:12px;
+		}
+		ol,ul {
+			list-style:none;
+		}
+		.cf:before,.cf:after{
+			content:" ";
+			display:table;
+		}
+		.cf:after{
+			clear:both;
+		}
+		.cf{
+			*zoom:1;
+		}
+		body {
+			margin:0 auto;
+			text-align:center;
+			font-size:12px;
+			font-family:Geneva,Arial,Helvetica,sans-serif;
+			background:url(iamges/allbg.jpg) repeat-y center #c0b7a9;
+		}
+		.allbg {
+			background:url(images/accountallbg.jpg) repeat-y center;
+			color:#573319;
+		}
+		.wrapper {
+			margin:0 auto;
+			width:1002px;
+			text-align:left;
+		}
+		.account_header {
+			position:relative;
+			height:166px;
+		}
+		.speakbox {
+			position:absolute;
+			width:370px;
+			height:95px;
+			left:254px;
+			top:48px;
+			padding:15px 20px 0 20px;
+			line-height:20px;
+			background:url(images/dialogbox.jpg) no-repeat;
+		}
+		.npc {
+			position:absolute;
+			top:0;
+			right:43px;
+			width:290px;
+			height:215px;
+			background:url(images/npc.jpg) no-repeat;
+		}
+		.account_maintitle {
+			height:30px;
+			padding:80px 0 0 150px;
+			text-indent:-10000px;
+			background:url(images/main_top.jpg) no-repeat;
+			overflow:hidden;
+		}
+		.account_maintitle span {
+			float:left;
+			width:229px;
+			height:20px;
+			background:url(images/titlesprite.jpg) no-repeat;
+		}
+		.account_maintitle button{
+			float:right;
+			margin-right:150px;
+			width:50px;
+			height:30px;
+		}
+		/* 登陆窗口 */
+		.account_container {
+			background:url(images/mainrepeat.jpg) repeat-y center;
+		}
+		.account_contop {
+			background:url(images/maincon_top.jpg) no-repeat top center;
+		}
+		.account_con {
+			padding-bottom:200px;
+			background:url(images/main_btm.jpg) no-repeat bottom center;
+			zoom:1;
+		}
+		.con{
+			width:800px;
+			margin:0 auto;
+		}
+		.msg{
+			float:left;
+			width:55%;
+			padding-left:5px;
+		}
+		.msg h2,.user h2{
+			width:100%;
+			text-align:center;
+			font-size:18px;
+			height:24px;
+			line-height:24px;
+		}
+		.msg ul{
+			height:300px;
+			border:1px solid #ccc;
+			margin:10px auto;
+			overflow:auto;
+			padding-left:10px;
+		}
+		.msg ul span{
+			margin-right:10px;
+			color:blue;
+			font-size:16px;
+		}
+		.msg ul p{
+			padding-left:20px;
+			margin-top:5px;
+		}
+		.msg form{
+			text-align:center;
+		}
+		.msg textarea{
+			width:100%;
+			height:100px;
+			margin:5px auto;
+			border:1px solid #ccc;
+			resize:none;
+		}
+		.msg button{
+			width:50px;
+			height:30px;
+		}
+		.user{
+			width:40%;
+			float:right;
+			padding-right:5px;
+		}
+		.user ul{
+			height:250px;
+			margin:10px auto;
+			padding-left:10px;
+			border:1px solid #ccc;
+			overflow:auto;
+		}
+		.user span{
+			float:left;
+			font-size:16px;
+			height:30px;
+			line-height:30px;
+			padding-top:15px;
+		}
+		.user button{
+			width:100px;
+			height:40px;
+			float:right;
+		}
+		.user textarea{
+			width:100%;
+			height:100px;
+			margin-top:10px;
+			resize:none;
+		}
+	</style>
+</head>
+<body class="allbg">
+	<div class="wrapper">
+		<div class="account_header">
+			<div class="speakbox">
+				<span>欢迎来到简易聊天室！</span>
+			</div>
+			<div class="npc">
+				
+			</div>
+		</div>
+		<h1 class="account_maintitle">
+			<span>JOIN NOW FOR FREE!</span>
+			<button type="button" id="logout">退出</button>
+			<button type="button" id="login">登陆</button>
+		</h1>
+		<div class="account_container">
+			<div class="account_contop">
+				<div class="account_con">
+					<div class="con cf">
+						<div class="msg">
+							<h2>聊天信息</h2>
+							<ul class="">
+								<li></li>
+								<li></li>
+							</ul>
+							<form>
+								<textarea></textarea>
+								<button type="button" id="clean">清屏</button>
+								<button type="button" id="send">发送</button>
+							</form>
+						</div>
+						<div class="user">
+							<h2>当前已注册的用户</h2>
+							<ul class="">
+								<li></li>
+								<li></li>
+							</ul>
+							<span>登陆信息</span>
+							<button type="button" id="online">仅显示在线用户</button>
+							<textarea></textarea>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery.js"></script>
+	<script>
+		var uid = "";
+		function getinfo(){
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/user/?method=getinfo",
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						$("#login").hide();
+						$("#logout").show();
+						uid = data.data._id;
+						getuser();
+					}else {
+						$("#logout").hide();
+						$("#login").show();
+					}
+				}
+			})
+		}
+		getinfo();
+
+		/* 退出 */
+
+		$("#logout").click(function(){
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/user/?method=logout",
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						alert("退出成功");
+						$("#logout").hide();
+						$("#login").show();
+					}
+				}
+			})
+		})
+
+		/* 到登陆页面 */
+
+		$("#login").click(function(){
+			window.location.href = "loadroom.html";
+		})
+
+		/* 获得已注册用户 */
+
+		function getuser(){
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/user/?method=listuser",
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					var $li = "";
+					for (var i = 0; i < data.data.length; i ++){
+						$li += "<li>" + data.data[i].name + "</li>";
+					}
+					$(".user ul").html($li);
+				}
+			})
+		}
+
+		/* 获取在线用户 */
+
+		$("#online").click(function(){
+			$.ajax({
+				url : 'http://chatroomapi.taobaoxyz.com/api/user/?method=listonline',
+				type : 'get',
+				dataType : 'jsonp',
+				jsonp : 'jsoncb',
+				success : function(data) {
+					if (data.done) {
+						$('.user li').remove();
+						for (var i = 0 ; i < data.data.length ; i++) {
+							$('<li>' + data.data[i].nickname + '</li>').appendTo('.user ul');
+						}
+					} else {
+						alert('Get Online User Error!');
+					}
+				}
+			})
+		})
+
+		/* 获取聊天信息 */
+
+		function getMsg(){
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/msg/?method=list",
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					if (data.done){
+						var $li = [];
+						for (var i = 0; i < data.data.length; i ++){
+							$li[i] = $("<li><span>" + data.data[i].author.nickname + "</span><var>" + data.data[i].time + "</var><br/><p>" + data.data[i].text + "</p></li>");
+							$li[i].appendTo($(".msg ul"));
+						}
+						$(".msg ul").scrollTop("100000");
+					}
+				}
+			})
+		}
+
+		/* 发送信息 */
+		
+		$("#send").click(function(){
+			var text = $(".msg textarea").val();
+			$.ajax({
+				url : "http://chatroomapi.taobaoxyz.com/api/msg/?method=add&text=" + text,
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : function(data){
+					console.log(data)
+					if (data.done){
+						getMsg();
+					}
+				}
+			})
+		})
+
+		/* 清除屏幕 */
+
+		$("#clean").click(function(){
+			$(".msg ul").html("");
+		})
+	</script>
+</body>
+</html>
